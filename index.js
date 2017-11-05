@@ -27,12 +27,28 @@ const LEONTYNA = {
   "lubi_koty": true,
   "kuchnia": ["japońska", "francuska"]
 };
-console.log(JANEK)
 
 const matchPartner = (firstPartner, secondPartner, variant) => {
+
+  const results = [];
+  for (const prop in firstPartner) {
+    if (typeof(firstPartner[prop]) === 'object') {
+      const longerArr = firstPartner[prop].length > secondPartner[prop].length ? firstPartner[prop] : secondPartner[prop];
+      const shorterArr = firstPartner[prop].length < secondPartner[prop].length ? firstPartner[prop] : secondPartner[prop];
+      shorterArr.map((element) => {
+        results.push(longerArr.includes(element))
+      })
+    }
+    else if (typeof(secondPartner[prop]) === 'undefined') {
+      results.push(true)
+    }
+    else {
+      results.push(firstPartner[prop] === secondPartner[prop])
+    }
+  }
   switch (variant) {
     case 'a': {
-      console.log('a');
+      console.log(!results.includes(false));
       break;
     }
     case 'b': {
@@ -46,4 +62,7 @@ const matchPartner = (firstPartner, secondPartner, variant) => {
     default:
       console.log('variant parameter is required')
   }
+
 };
+
+matchPartner(JANEK, DANUTA, 'a')
