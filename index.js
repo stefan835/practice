@@ -61,7 +61,6 @@ const matchPartner = (firstPartner, secondPartner, variant) => {
     }
     case 'c': {
       const results = getResults(false);
-      console.log(results)
       return results.filter(result => {
         return result === true
       }).length / results.length * 100 + '%'
