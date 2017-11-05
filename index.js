@@ -34,7 +34,7 @@ const matchPartner = (firstPartner, secondPartner, variant) => {
   for (const prop in firstPartner) {
     if (typeof(firstPartner[prop]) === 'object') {
       const longerArr = firstPartner[prop].length > secondPartner[prop].length ? firstPartner[prop] : secondPartner[prop];
-      const shorterArr = firstPartner[prop].length < secondPartner[prop].length ? firstPartner[prop] : secondPartner[prop];
+      const shorterArr = firstPartner[prop].length <= secondPartner[prop].length ? firstPartner[prop] : secondPartner[prop];
       shorterArr.map((element) => {
         results.push(longerArr.includes(element))
       })
@@ -48,8 +48,7 @@ const matchPartner = (firstPartner, secondPartner, variant) => {
   }
   switch (variant) {
     case 'a': {
-      console.log(!results.includes(false));
-      break;
+      return !results.includes(false)
     }
     case 'b': {
       console.log('b');
@@ -65,4 +64,7 @@ const matchPartner = (firstPartner, secondPartner, variant) => {
 
 };
 
-matchPartner(JANEK, DANUTA, 'a')
+console.log("JANEK, DANUTA", matchPartner(JANEK, DANUTA, 'a'));
+console.log("JANEK, DANUTA", matchPartner(JANEK, GENOWEFA, 'a'));
+console.log("JANEK, DANUTA", matchPartner(JANEK, JANINA, 'a'));
+console.log("JANEK, DANUTA", matchPartner(JANEK, LEONTYNA, 'a'));
