@@ -35,9 +35,11 @@ const matchPartner = (firstPartner, secondPartner, variant) => {
       if (typeof(firstPartner[prop]) === 'object') {
         const longerArr = firstPartner[prop].length > secondPartner[prop].length ? firstPartner[prop] : secondPartner[prop];
         const shorterArr = firstPartner[prop].length <= secondPartner[prop].length ? firstPartner[prop] : secondPartner[prop];
+        const partResults = [];
         shorterArr.map((element) => {
-          results.push(longerArr.includes(element))
-        })
+          partResults.push(longerArr.includes(element))
+        });
+        partResults.includes(false) ? results.push(false) : results.push(true)
       }
       else if (typeof(secondPartner[prop]) === 'undefined') {
         results.push(condition)
@@ -58,12 +60,15 @@ const matchPartner = (firstPartner, secondPartner, variant) => {
       return !results.includes(false)
     }
     case 'c': {
-      return
+      const results = getResults(false);
+      console.log(results)
+      return results.filter(result => {
+        return result === true
+      }).length / results.length * 100 + '%'
     }
     default:
       console.log('variant parameter is required')
   }
-
 };
 
 console.log("JANEK, DANUTA", matchPartner(JANEK, DANUTA, 'a'));
